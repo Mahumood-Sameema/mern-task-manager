@@ -1,5 +1,5 @@
 import Task from "../models/task.js";
-import DailyPlan from "../models/DailyPlan.js";
+import DailyPlan from "../models/dailyplan.js";
 
 const MAX_HOURS_PER_DAY = 6;
 
