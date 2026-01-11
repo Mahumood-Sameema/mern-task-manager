@@ -6,24 +6,13 @@ import Navbar from "../components/Navbar";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function PlanTask() {
-  const [tasks, setTasks] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
   const editingTask = location.state?.task;
 
-  const fetchTasks = async () => {
-    try {
-      const { data } = await axios.get("/tasks");
-      setTasks(data);
-    } catch {
-      toast.error("Failed to fetch tasks");
-    }
-  };
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+
 
   const handleAddOrUpdateTask = async (task) => {
     try {
