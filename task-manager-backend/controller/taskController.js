@@ -43,8 +43,6 @@ const addTask = asyncHandler(async (req, res) => {
 const getTask = asyncHandler(async (req, res) => {
   const { completed } = req.query;
 
-  console.log("request user:", req.user);
-
   let filter = {
     userId: req.user   // ✅ FIXED
   };
