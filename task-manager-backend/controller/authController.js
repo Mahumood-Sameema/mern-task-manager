@@ -30,6 +30,8 @@ const signup = asyncHandler(async(req,res) =>{
     process.env.JWT_SECRET,
     {expiresIn: "1hr"}
   )
+
+
    res.status(201).json({
     status: true,
     message : "User Created",

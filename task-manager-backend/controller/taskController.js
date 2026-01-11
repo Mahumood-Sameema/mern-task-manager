@@ -32,7 +32,6 @@ const addTask = asyncHandler(async (req, res) => {
     completed: false,
     userId: req.user,
     source: "manual",
-    userId: req.user
   });
 
   res.status(201).json({
@@ -41,21 +40,23 @@ const addTask = asyncHandler(async (req, res) => {
   });
 });
 
-
-const getTask = asyncHandler(async(req,res) =>{
+const getTask = asyncHandler(async (req, res) => {
   const { completed } = req.query;
 
+  console.log("request user:", req.user);
+
   let filter = {
-    user: req.user
+    userId: req.user   // ✅ FIXED
   };
 
-  if (completed !== undefined){
+  if (completed !== undefined) {
     filter.completed = completed === "true";
-  } 
+  }
 
-  const task = await Task.find(filter);
-  res.json(task);
+  const tasks = await Task.find(filter);
+  res.json(tasks);
 });
+
 
 const deleteTask = asyncHandler(async(req,res) =>{
   const {id} = req.params;
@@ -126,7 +127,9 @@ const addPlannedTask = asyncHandler(async (req, res) => {
 
 const getTasksByDate = asyncHandler(async (req, res) => {
   const { date } = req.query;
-
+  if (!date) {
+    return res.status(400).json({ error: "Date is required" });
+  }
   const tasks = await getTasksForDate(req.user, date);
 
   res.json(tasks);
