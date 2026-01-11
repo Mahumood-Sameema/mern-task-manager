@@ -43,8 +43,9 @@ const addTask = asyncHandler(async (req, res) => {
 const getTask = asyncHandler(async (req, res) => {
   const { completed } = req.query;
 
+
   let filter = {
-    userId: req.user   // ✅ FIXED
+    userId: req.user   
   };
 
   if (completed !== undefined) {
@@ -103,6 +104,8 @@ const toggleCompleted = asyncHandler(async(req, res) => {
 });
 
 const addPlannedTask = asyncHandler(async (req, res) => {
+  console.log("REQ USER:", req.user);
+  console.log("BODY:", req.body);
   const { title, deadline, priority, estimatedTimeHours } = req.body;
 
   if (!title || !deadline || !priority || !estimatedTimeHours) {
